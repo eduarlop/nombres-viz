@@ -46,16 +46,57 @@
 
         .axis .x-axis-title {
             font-size: 0.8em;
-            letter-spacing: 0.45em;
+            letter-spacing: 0.3em;
+        }
+
+        .legends-box {
+            text-align: center;
+        }
+
+        .legend {
+            display: inline-block;
+            margin: 0 10px 20px;
+        }
+
+        .fa-female {
+            color: #FF4081;
+        }
+
+        .fa-male {
+            color: #2196F3;
+        }
+
+        .note {
+            color: #CCCCCC;
+            font-size: 12px;
+        }
+
+        a, a:visited {
+            color: #ff4081;
         }
 
     </style>
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://use.fontawesome.com/096633be82.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Nombres más populares en México</h1>
         <svg class="viz"></svg>
+        <div class="legends-box">
+            <div class="legend">
+                <i class="fa fa-male" aria-hidden="true"></i>
+                <label>Hombre</label>
+            </div>
+            <div class="legend">
+                <i class="fa fa-female" aria-hidden="true"></i>
+                <label>Mujer</label>
+            </div>
+        </div>
+        <p class="note">
+            <i>* Encuesta realizada en el 2015 a 100 mil personas elegidas aleatoriamente, de las cuales el 60% eran mujeres y el 40% eran hombres. Para más información visita
+            <a href="http://datamx.io/dataset/nombres-mas-comunes-en-mexico/resource/f652b517-e943-41d8-8b54-0866eb6986a5?inner_span=True">datamx.io</a></i>
+        </p>
     </div>
 <script>
     // ======================
@@ -82,16 +123,6 @@
                 return item;
             }).slice(0, 10);
 
-        var men = all.filter(function(item) {
-            return item['GENERO'] === 'HOMBRE';
-        });
-
-        var women = all.filter(function(item) {
-            return item['GENERO'] === 'MUJER';
-        });
-
-        console.dir(all);
-
         // ======================
         // Scales
         // ======================
@@ -111,18 +142,6 @@
             .range([height, 0]);
 
         // ======================
-        // Axis
-        // ======================
-
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom");
-
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left");
-
-        // ======================
         // Layout
         // ======================
 
@@ -134,23 +153,6 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        // Append the x axis
-        svgViewport.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-
-        // Append the y axis
-        svgViewport.append("g")
-            .attr("class", "y axis")
-            .call(yAxis).append("text")
-            .attr("class", "x-axis-title")
-            .attr("transform", "rotate(-90)")
-            .attr("x", -height / 4)
-            .attr("y", -60)
-            .attr("dy", ".70em")
-            .style("text-anchor", "end")
-            .text("Repeticiones");
 
         // ======================
         // Bars
@@ -175,6 +177,37 @@
             .delay(function(d, i) { return i * 100; })
             .attr("y", function(d){return y(d['REPETICIONES']);})
             .attr("height", function(d){ return height - y(d['REPETICIONES']); });
+
+
+        // ======================
+        // Axis
+        // ======================
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
+
+        // Append the x axis
+        svgViewport.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        // Append the y axis
+        svgViewport.append("g")
+            .attr("class", "y axis")
+            .call(yAxis).append("text")
+            .attr("class", "x-axis-title")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 4)
+            .attr("y", -60)
+            .attr("dy", ".70em")
+            .style("text-anchor", "end")
+            .text("Repeticiones");
 
     });
 
