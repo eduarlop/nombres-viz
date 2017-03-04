@@ -17,10 +17,12 @@ d3.csv("datasets/nombres.csv", function (error, data) {
     var all = data
         .sort(function(a, b) {
             return b['REPETICIONES'] - a['REPETICIONES'];
-        }).map(function(item) {
+        })
+        .map(function(item) {
             item['REPETICIONES'] = parseInt(item['REPETICIONES'], 10);
             return item;
-        }).slice(0, 10);
+        })
+        .slice(0, 10);
 
     // ======================
     // Scales
@@ -50,7 +52,7 @@ d3.csv("datasets/nombres.csv", function (error, data) {
     // Generates a group where the to put the viz
     var svgViewport = svg
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
     // ======================
@@ -60,16 +62,16 @@ d3.csv("datasets/nombres.csv", function (error, data) {
         .data(all)
         .enter()
         .append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) {
-            return x(d['NOMBRE']);
-        })
-        .attr("y", height)
-        .attr("width", x.rangeBand())
-        .attr("height", 0)
-        .style("fill", function(d){
-            return (d['GENERO'] === 'HOMBRE') ? '#2196F3' : '#FF4081';
-        });
+            .attr("class", "bar")
+            .attr("x", function(d) {
+                return x(d['NOMBRE']);
+            })
+            .attr("y", height)
+            .attr("width", x.rangeBand())
+            .attr("height", 0)
+            .style("fill", function(d){
+                return (d['GENERO'] === 'HOMBRE') ? '#2196F3' : '#FF4081';
+            });
 
     // Animate in cascade each rectangle
     bar.transition()
@@ -99,13 +101,13 @@ d3.csv("datasets/nombres.csv", function (error, data) {
     // Append the y axis
     svgViewport.append("g")
         .attr("class", "y axis")
-        .call(yAxis).append("text")
-        .attr("class", "x-axis-title")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 4)
-        .attr("y", -60)
-        .attr("dy", ".70em")
-        .style("text-anchor", "end")
-        .text("Repeticiones");
+        .call(yAxis)
+        .append("text")
+            .attr("class", "x-axis-title")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -100)
+            .attr("y", -50)
+            .style("text-anchor", "end")
+            .text("Repeticiones");
 
 });

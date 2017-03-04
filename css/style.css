@@ -17,6 +17,7 @@ a, a:visited {
 
 .container {
     background: #233752;
+    border-radius: 8px;
     box-sizing: border-box;
     margin: 40px auto;
     min-width: 780px;
