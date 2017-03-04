@@ -1,0 +1,74 @@
+html {
+    background: #16263D;
+    color: #FFFFFF;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+a, a:visited {
+    color: #ff4081;
+}
+
+.container {
+    background: #233752;
+    box-sizing: border-box;
+    margin: 40px auto;
+    min-width: 780px;
+    padding: 20px 40px;
+    width: 80%;
+}
+
+.viz {
+    display: block;
+    height: 460px;
+    margin: 0 auto 20px;
+    width: 700px;
+}
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.axis path {
+    fill: none;
+    stroke: rgba(152,175,197,0.7);
+}
+
+.axis text {
+    fill: #FFF;
+    font-size: 0.6em;
+    letter-spacing: 0.1em;
+}
+
+.axis .x-axis-title {
+    font-size: 0.8em;
+    letter-spacing: 0.3em;
+}
+
+.legends-box {
+    text-align: center;
+}
+
+.legend {
+    display: inline-block;
+    margin: 0 10px 20px;
+}
+
+.fa-female {
+    color: #FF4081;
+}
+
+.fa-male {
+    color: #2196F3;
+}
+
+.note {
+    color: #CCCCCC;
+    font-size: 12px;
+}
